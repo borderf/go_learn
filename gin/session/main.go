@@ -19,6 +19,10 @@ func main() {
 	r.GET("/hello", func(ctx *gin.Context) {
 		// 获取session对象
 		session := sessions.Default(ctx)
+		// 设置session的过期时间
+		session.Options(sessions.Options{
+			MaxAge: 3600 * 6,
+		})
 		if session.Get("hello") != "world" {
 			// session 设置值
 			session.Set("hello", "world")
